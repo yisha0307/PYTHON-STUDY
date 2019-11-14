@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-
+# python2
 x = 'a'
 y = 'b'
 # 换行输出
