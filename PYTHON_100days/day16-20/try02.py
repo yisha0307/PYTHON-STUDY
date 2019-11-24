@@ -67,3 +67,41 @@ items1 = list(map(lambda x: x **2, filter(lambda x: x % 2, range(1, 10))))
 items2 = [x ** 2 for x in range(1, 10) if x % 2]
 print(items1, items2)
 
+# 用zip组合键和值来创建字典
+keys = ['1001', '1002', '1003']
+values = ['骆昊', '王大锤', '白元芳']
+d = dict(zip(keys, values))
+print(d)
+
+
+'''
+装饰器函数（使用装饰器和取消装饰器）
+'''
+from functools import wraps
+from time import time
+# def record(output):
+#     # 自定义带参数的装饰器
+#     def decorate(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             start = time()
+#             result = func(*args, **kwargs)
+#             output(func.__name__, time() - start)
+#             return result
+#         return wrapper
+#     return decorate
+
+class Record():
+    # 自定义装饰器类
+    # 通过__call__使得对象可以当成函数调用
+    def __init__(self, output):
+        self.output = output
+    def __call__(self, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            # *args: 元组 **kwargs: 字典
+            start = time()
+            result = func(*args, **kwargs)
+            self.output(func.__name__, time()-start)
+            return result
+        return wrapper
