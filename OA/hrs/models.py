@@ -6,7 +6,8 @@ class Dept(models.Model):
     no = models.IntegerField(primary_key=True, db_column='dno', verbose_name='部门编号')
     name = models.CharField(max_length=20, db_column='dname', verbose_name='部门名称')
     location = models.CharField(max_length=10, db_column='dloc', verbose_name='部门所在地')
-
+    def __str__(self):
+        return self.name
     class Meta:
         db_table = 'tb_dept'
 
@@ -21,6 +22,7 @@ class Emp(models.Model):
     comm = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True, verbose_name='补贴')
     # 多对一外键关联（参照部门模型)
     dept = models.ForeignKey(Dept, db_column='dno', on_delete=models.PROTECT, verbose_name='所在部门')
-
+    def __str__(self):
+        return self.name
     class Meta:
         db_table = 'tb_emp'
