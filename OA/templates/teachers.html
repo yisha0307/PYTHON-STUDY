@@ -20,9 +20,9 @@
             <h3>{{teacher.name}}</h3>
             <p>{{teacher.detail}}</p>
             <p class="comment">
-                <a href=''>好评</a>
+                <a href='/praise/?tno={{teacher.no}}'>好评</a>
                 (<span>{{teacher.good_count}}</span>)
-                <a href=''>差评</a>
+                <a href='/criticize/?tno={{teacher.no}}'>差评</a>
                 (<span>{{teacher.bad_count}}</span>)
             </p>
         </div>
@@ -34,5 +34,24 @@
     <p>
         <a href='/'>返回首页</a>
     </p>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // jquery处理response
+        $(() => {
+            $('.comment>a').on('click', e => {
+                e.preventDefault()
+                let anchor = $(e.target)
+                let url = anchor.attr('href')
+                $.getJSON(url, json => {
+                    if (json.code === 200) {
+                        let span = anchor.next()
+                        span.text(parseInt(span.text()) + 1)
+                    } else {
+                        alert(json.hint)
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>

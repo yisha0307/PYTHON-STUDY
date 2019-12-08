@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hrs/', include('hrs.urls')),
     path('', views.show_subjects),
-    path('teachers/', views.show_teachers)
+    path('teachers/', views.show_teachers),
+    path('praise/', views.praise_or_criticize),
+    path('criticize/', views.praise_or_criticize),
 ]
